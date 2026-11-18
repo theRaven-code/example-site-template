@@ -1,10 +1,12 @@
 # Winner Group website — six design versions
 
-Open `index.html` for a menu of the six versions.
+Open `index.html` for the showcase: a switch bar at the top swaps between the six versions, with a Desktop/Phone toggle and an "Open full page" link. Arrow keys also switch designs, and `#v1` to `#v6` at the end of the address links straight to one version.
+
+The showcase must be opened from a web server (GitHub Pages or any host). Opened straight from a folder on your computer, the preview area stays blank.
 
 ```
 WHAT IS IN THIS FOLDER
-  index.html            A menu linking to the six versions (for review only).
+  index.html            The showcase: one page that switches between all six.
   1-navy-brass/         Version 1
   2-heritage-red/       Version 2
   3-green-sidebar/      Version 3
