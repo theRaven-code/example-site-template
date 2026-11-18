@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Winner Group — Website Design Showcase</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:Arial,Helvetica,sans-serif;background:#2B313B;color:#FFFFFF;display:flex;flex-direction:column;overflow:hidden}
+button,a{font-family:inherit}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid #E8CC85;outline-offset:2px}
+
+.bar{flex:0 0 auto;background:#141820;border-bottom:1px solid #3A414D;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px}
+.brand{display:flex;flex-direction:column;line-height:1.2;margin-right:4px}
+.brand b{font-family:Georgia,serif;font-size:18px;letter-spacing:.08em}
+.brand span{font-size:12px;color:#B6BDC9}
+
+.versions{display:flex;gap:6px;flex:1 1 auto;overflow-x:auto;scrollbar-width:none;padding:2px}
+.versions::-webkit-scrollbar{display:none}
+.v{flex:0 0 auto;display:flex;align-items:center;gap:8px;min-height:44px;padding:6px 14px 6px 8px;border:1px solid #4A5260;border-radius:6px;background:transparent;color:#E4E8EE;font-size:14px;font-weight:600;white-space:nowrap;transition:background-color .2s ease,border-color .2s ease,color .2s ease}
+.v:hover{background:#232935;border-color:#6A7385}
+.v .sw{width:26px;height:26px;border-radius:4px;flex:0 0 26px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#FFFFFF;box-shadow:inset 0 0 0 2px rgba(255,255,255,.18)}
+.v[aria-pressed="true"]{background:#FFFFFF;border-color:#FFFFFF;color:#141820}
+
+.tools{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+.seg{display:flex;border:1px solid #4A5260;border-radius:6px;overflow:hidden}
+.seg button{min-height:44px;padding:6px 14px;border:0;background:transparent;color:#E4E8EE;font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px;transition:background-color .2s ease}
+.seg button+button{border-left:1px solid #4A5260}
+.seg button[aria-pressed="true"]{background:#E4E8EE;color:#141820}
+.open{min-height:44px;display:flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid #4A5260;border-radius:6px;color:#E4E8EE;text-decoration:none;font-size:14px;font-weight:600}
+.open:hover{background:#232935}
+
+.info{flex:0 0 auto;background:#1C212B;border-bottom:1px solid #3A414D;padding:8px 16px;font-size:14px;color:#C9CFD8;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;justify-content:space-between}
+.txt{display:flex;flex-wrap:wrap;gap:2px 14px;align-items:baseline;min-width:0}
+.info strong{color:#FFFFFF;font-size:15px}
+
+.stage{flex:1 1 auto;min-height:0;display:flex;justify-content:center;align-items:stretch;padding:0}
+.frame{position:relative;width:100%;height:100%;background:#FFFFFF;transition:width .35s ease,border-radius .35s ease,margin .35s ease,box-shadow .35s ease}
+.phone .frame{width:390px;max-width:calc(100% - 32px);margin:18px 0;border-radius:28px;overflow:hidden;box-shadow:0 0 0 10px #0E1117,0 18px 50px rgba(0,0,0,.5)}
+iframe{display:block;width:100%;height:100%;border:0;transition:opacity .3s ease}
+iframe.out{opacity:0}
+.hint{position:absolute;right:16px;bottom:14px;font-size:12px;color:#9AA2AF;pointer-events:none}
+
+@media (max-width:700px){
+  .brand span,.hint,.open .lbl,.seg,#desc{display:none}
+  .info{font-size:13px;padding:6px 16px}
+  .bar{padding:8px 16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="brand"><b>WINNER GROUP</b><span>Website design showcase</span></div>
+  <nav class="versions" aria-label="Design versions" id="versions"></nav>
+</header>
+
+<div class="info"><div class="txt" aria-live="polite"><strong id="name"></strong><span id="desc"></span></div>
+  <div class="tools">
+    <div class="seg" role="group" aria-label="Preview size">
+      <button type="button" id="desk" aria-pressed="true">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="13" rx="1"></rect><path d="M8 21h8M12 17v4"></path></svg>Desktop</button>
+      <button type="button" id="phone" aria-pressed="false">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2"></rect><path d="M11 18h2"></path></svg>Phone</button>
+    </div>
+    <a class="open" id="open" href="1-navy-brass/" target="_blank" rel="noopener">
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"></path></svg><span class="lbl">Open full page</span></a>
+  </div>
+</div>
+
+<main class="stage" id="stage">
+  <div class="frame">
+    <iframe id="view" title="Website design preview" src="1-navy-brass/"></iframe>
+  </div>
+  <div class="hint">← → to switch designs</div>
+</main>
+
+<script>
+(function () {
+  var V = [
+    { dir: "1-navy-brass",    name: "Version 1 — Navy & Brass",       short: "Navy & Brass",   c: "#0E2747", desc: "Conventional corporate layout: top menu, serif headings, photo service cards." },
+    { dir: "2-heritage-red",  name: "Version 2 — Heritage Red",       short: "Heritage Red",   c: "#7A1F1F", desc: "Maroon and gold on ivory, centred letterhead masthead, certificates as seals." },
+    { dir: "3-green-sidebar", name: "Version 3 — Green Sidebar",      short: "Green Sidebar",  c: "#12402E", desc: "Fixed menu down the left, plain type, rate estimator first." },
+    { dir: "4-regional-teal", name: "Version 4 — ASEAN Regional Teal", short: "Regional Teal", c: "#0B4F4A", desc: "Country office cards near the top switch the page to that market's language." },
+    { dir: "5-bold-blue",     name: "Version 5 — ASEAN Bold Blue",    short: "Bold Blue",      c: "#123E9C", desc: "Louder regional trade style: photo block and a yellow hotline band." },
+    { dir: "6-mobile-first",  name: "Version 6 — ASEAN Mobile First", short: "Mobile First",   c: "#1F2A60", desc: "Designed for phones first; best viewed with the Phone toggle.", phone: true }
+  ];
+  var nav = document.getElementById("versions");
+  var view = document.getElementById("view");
+  var body = document.body;
+  var cur = -1, buttons = [];
+
+  V.forEach(function (v, i) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "v";
+    b.setAttribute("aria-pressed", "false");
+    b.innerHTML = '<span class="sw" style="background:' + v.c + '">' + (i + 1) + "</span>" + v.short;
+    b.addEventListener("click", function () { show(i, true); });
+    nav.appendChild(b);
+    buttons.push(b);
+  });
+
+  function setPhone(on) {
+    body.classList.toggle("phone", on);
+    document.getElementById("phone").setAttribute("aria-pressed", String(on));
+    document.getElementById("desk").setAttribute("aria-pressed", String(!on));
+  }
+  document.getElementById("desk").addEventListener("click", function () { setPhone(false); });
+  document.getElementById("phone").addEventListener("click", function () { setPhone(true); });
+
+  function show(i, user) {
+    if (i === cur) return;
+    var first = cur === -1;
+    cur = i;
+    var v = V[i];
+    buttons.forEach(function (b, k) { b.setAttribute("aria-pressed", String(k === i)); });
+    buttons[i].scrollIntoView({ block: "nearest", inline: "nearest" });
+    document.getElementById("name").textContent = v.name;
+    document.getElementById("desc").textContent = v.desc;
+    document.getElementById("open").href = v.dir + "/";
+    document.title = v.short + " — Winner Group design showcase";
+    if (v.phone && user) setPhone(true);
+    if (history.replaceState) history.replaceState(null, "", "#v" + (i + 1));
+    var target = v.dir + "/";
+    if (first && view.getAttribute("src") === target) return;
+    view.classList.add("out");
+    setTimeout(function () { view.src = target; }, 180);
+  }
+  view.addEventListener("load", function () { view.classList.remove("out"); });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.target.closest && e.target.closest("input,textarea,select")) return;
+    if (e.key === "ArrowRight") show((cur + 1) % V.length, true);
+    else if (e.key === "ArrowLeft") show((cur + V.length - 1) % V.length, true);
+  });
+
+  var m = /#v([1-6])/.exec(location.hash);
+  var start = m ? +m[1] - 1 : 0;
+  if (start === 5) setPhone(true);
+  show(start, false);
+})();
+</script>
+</body>
+</html>
